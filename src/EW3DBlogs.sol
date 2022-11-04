@@ -18,6 +18,15 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
     mapping(uint256 => string) public idToImg;
     mapping(uint256 => address) public idToOwner;
 
+    event NewBlogPost(address indexed poster, uint256 blogId);
+    event UpdatedTitle(uint256 indexed blogId);
+    event UpdatedDesc(uint256 indexed blogId);
+    event UpdatedContent(uint256 indexed blogId);
+    event UpdatedImg(uint256 indexed blogId);
+    event UpdatedTags(uint256 indexed blogId);
+
+    error OwnershipError();
+
     struct BlogPost {
         string title;
         string desc;
@@ -30,7 +39,9 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
     BlogPost[] public blogPosts;
 
     modifier isOwner(uint256 _tokenId) {
-        require(msg.sender == idToOwner[_tokenId]);
+        if (msg.sender != idToOwner[_tokenId]) {
+            revert OwnershipError();
+        }
         _;
     }
 
@@ -128,6 +139,7 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
         idToImg[newItemId] = _img;
         idToOwner[newItemId] = msg.sender;
         _setTokenURI(newItemId, getTokenUri(newItemId));
+        emit NewBlogPost(msg.sender, newItemId);
     }
 
     function getBlogsLen() public view returns (uint256) {
@@ -179,6 +191,8 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
         idToPost[_tokenId] = post;
 
         _setTokenURI(_tokenId, getTokenUri(_tokenId));
+
+        emit UpdatedTitle(_tokenId);
     }
 
     function updatePostDesc(uint256 _tokenId, string calldata _desc)
@@ -193,6 +207,8 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
         idToPost[_tokenId] = post;
 
         _setTokenURI(_tokenId, getTokenUri(_tokenId));
+
+        emit UpdatedDesc(_tokenId);
     }
 
     function updatePostContent(uint256 _tokenId, string calldata _content)
@@ -207,6 +223,8 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
         idToPost[_tokenId] = post;
 
         _setTokenURI(_tokenId, getTokenUri(_tokenId));
+
+        emit UpdatedContent(_tokenId);
     }
 
     function updatePostTags(uint256 _tokenId, string calldata _tags)
@@ -221,6 +239,8 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
         idToPost[_tokenId] = post;
 
         _setTokenURI(_tokenId, getTokenUri(_tokenId));
+
+        emit UpdatedTags(_tokenId);
     }
 
     function updateImg(uint256 _tokenId, string calldata _img)
@@ -235,5 +255,7 @@ contract EW3DBlogs is ERC721URIStorage, Ownable {
 
         idToImg[_tokenId] = _img;
         _setTokenURI(_tokenId, getTokenUri(_tokenId));
+
+        emit UpdatedImg(_tokenId);
     }
 }

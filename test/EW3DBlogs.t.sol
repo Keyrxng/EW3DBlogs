@@ -17,6 +17,15 @@ contract EW3DBlogsTest is Test {
     EW3DBlogs blogPosts;
     address eoa = 0xD0CE7E521d26CAc35a7B10d31d6CCc7ffFF8B15e;
 
+    event NewBlogPost(address indexed poster, uint256 blogId);
+    event UpdatedTitle(uint256 indexed blogId);
+    event UpdatedDesc(uint256 indexed blogId);
+    event UpdatedContent(uint256 indexed blogId);
+    event UpdatedImg(uint256 indexed blogId);
+    event UpdatedTags(uint256 indexed blogId);
+
+    error OwnershipError();
+
     function setUp() public {
         vm.startPrank(eoa);
         blogPosts = new EW3DBlogs();
@@ -97,10 +106,17 @@ contract EW3DBlogsTest is Test {
 
     function testFailIsOwner() public {
         vm.stopPrank();
-        blogPosts.updatePostTitle(2, "pwned");
+        vm.expectRevert();
+        blogPosts.updatePostTitle(1, "pwned");
+        vm.expectRevert();
         blogPosts.updateImg(1, "rekt");
+        vm.expectRevert();
+        blogPosts.updatePostTitle(2, "pwned");
+        vm.expectRevert();
         blogPosts.updatePostContent(3, "rekt");
+        vm.expectRevert();
         blogPosts.updatePostTags(2, "Not your token, not your right");
+        vm.expectRevert();
     }
 
     function testIsOwner() public {
