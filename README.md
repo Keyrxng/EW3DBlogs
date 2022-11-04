@@ -4,7 +4,7 @@
 
 ## Concept
 
-Designed so that anyone can mint an NFT with a meta scheme as follows:
+Designed so that anyone can mint an NFT with a metadata scheme as follows:
 
 <ul>
 <li>Title</li>
@@ -50,7 +50,8 @@ Mint()
 ```
 
 - The content needn't be HTML but is advised to be
-- The Image must be an IPFS hash such as - 'ipfs://QmUNnXwPYYvdkQeEDB3KXy1Xtkb42NQkzt7xdMM2hby4VW/0'
+- The Img must be an IPFS hash such as - 'ipfs://QmUNnXwPYYvdkQeEDB3KXy1Xtkb42NQkzt7xdMM2hby4VW/0'
+- The Img is the complete metadata IPFS hash and will be handled easily on the UI
 
 # What's to come?
 
