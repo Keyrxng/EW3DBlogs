@@ -1,0 +1,3 @@
+[submodule "ew3dao_blogs/lib/forge-std"]
+	path = ew3dao_blogs/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std.git
