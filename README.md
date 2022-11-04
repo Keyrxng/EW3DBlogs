@@ -50,7 +50,7 @@ Mint()
 ```
 
 - The content needn't be HTML but is advised to be
-- The Image must be an IPFS hash such as - 'ipfs://QmVMZgbvGcsouoEyzYHHD7WnE2W3fFv1jptPv2peszikMY/EW3D_logo.jpg'
+- The Image must be an IPFS hash such as - 'ipfs://QmUNnXwPYYvdkQeEDB3KXy1Xtkb42NQkzt7xdMM2hby4VW/0'
 
 # What's to come?
 
